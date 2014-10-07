@@ -1,0 +1,39 @@
+<div class="row">
+  <div ng-show="err" class="col-xs-12">
+    <div class="alert alert-danger">
+      {{err}}
+    </div>
+  </div>
+  <div class="col-xs-12">
+    <div class="row">
+      <div class="col-xs-12 text-center">
+        <h3>Total Worked: <span class="label label-primary">{{grandTotal | number:2}} h</span></h3>
+      </div>
+    </div>
+    <div class="row text-center" style="margin-bottom: 20px">
+      <div ng-repeat="(key, value) in total" class="label label-primary" style="margin-right: 10px">
+        <b>{{key}}</b> {{value | number:2}} h
+      </div>
+    </div>
+  </div>
+  <div ng-show="timeTracked" class="col-xs-12">
+    <table class="table table-striped">
+      <tr>
+        <td>#</td>
+        <td>Project</td>
+        <td>Task</td>
+        <td>Start</td>
+        <td>End</td>
+        <td>Hours</td>
+      </tr>
+      <tr ng-repeat="item in timeTracked track by item.id">
+        <td>{{item.id}}</td>
+        <td>{{item.PROJECT}}</td>
+        <td>{{item.TASK}}</td>
+        <td>{{item.START}}</td>
+        <td>{{item.END}}</td>
+        <td>{{item.HOURS}}</td>
+      </tr>
+    </table>
+  </div>
+</div>
