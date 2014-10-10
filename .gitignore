@@ -3,4 +3,6 @@ dist
 .tmp
 .sass-cache
 bower_components
-files/data.csv
+app/files/data.csv
+timeAnalizer.sublime-project
+timeAnalizer.sublime-workspace

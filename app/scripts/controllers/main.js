@@ -15,6 +15,7 @@ angular.module('timeAnalyzerApp')
     		$scope.timeTracked = formattedRes;
 
     		getTaskTotal(formattedRes);
+            getLongestDay(formattedRes);
     	},
     	function(err){
     		$scope.err = err;
@@ -22,7 +23,7 @@ angular.module('timeAnalyzerApp')
     );
 
     var getTaskTotal = function(formattedRes){
-    	var groupedRes = _.groupBy(formattedRes, 'TASK')
+    	var groupedRes = _.groupBy(formattedRes, 'TASK');
 
     	//calculate the total splitted by task
     	var total = {};
@@ -47,5 +48,13 @@ angular.module('timeAnalyzerApp')
     	});
 
     	$scope.grandTotal = grandTotal;
+    };
+
+    var getLongestDay =function(formattedRes){
+        var groupedRes = _.groupBy(formattedRes, 'START');
+        //raggruppare per data (va tolta l'ora)
+        // fare la somma del singolo giorno
+        //ritornare _.max()
+        console.log(groupedRes);
     };
   });
