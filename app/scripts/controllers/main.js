@@ -9,52 +9,40 @@
  */
 angular.module('timeAnalyzerApp')
   .controller('MainCtrl', function ($scope, dataLoader, csvToJson, _) {
-    dataLoader.getData().then(
-    	function(res){
-    		var formattedRes = csvToJson.toJson(res);
-    		$scope.timeTracked = formattedRes;
 
-    		getTaskTotal(formattedRes);
-            getLongestDay(formattedRes);
-    	},
-    	function(err){
-    		$scope.err = err;
-    	}
-    );
+     $scope.showContent = function($fileContent){
+        var formattedRes = csvToJson.toJson($fileContent);
+        $scope.timeTracked = formattedRes;
+
+        getTaskTotal(formattedRes);
+    };
 
     var getTaskTotal = function(formattedRes){
-    	var groupedRes = _.groupBy(formattedRes, 'TASK');
+    	var groupedTask = _.groupBy(formattedRes, 'TASK');
 
     	//calculate the total splitted by task
-    	var total = {};
+    	var totalTask = {};
 
-    	_.forEach(groupedRes, function(taskGroup){
+    	_.forEach(groupedTask, function(taskGroup){
     		var label = taskGroup[0].TASK;
-    		var totalTime = 0;
+    		var totalTaskTime = 0;
     		_.forEach(taskGroup, function(task){
     			if(task.HOURS){
-    				totalTime += parseFloat(task.HOURS.replace(',','.'), 10);
+    				totalTaskTime += parseFloat(task.HOURS.replace(',','.'), 10);
     			}
     		});
-    		total[label] = totalTime;
+    		totalTask[label] = totalTaskTime;
     	});
 
-    	$scope.total = total;
+    	$scope.totalTask = totalTask;
 
     	//calculate the total hours tracked
     	var grandTotal = 0
-    	_.forEach($scope.total, function(groupTotal){
+    	_.forEach($scope.totalTask, function(groupTotal){
     		grandTotal += groupTotal;
     	});
 
     	$scope.grandTotal = grandTotal;
     };
 
-    var getLongestDay =function(formattedRes){
-        var groupedRes = _.groupBy(formattedRes, 'START');
-        //raggruppare per data (va tolta l'ora)
-        // fare la somma del singolo giorno
-        //ritornare _.max()
-        console.log(groupedRes);
-    };
   });

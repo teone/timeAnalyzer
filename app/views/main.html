@@ -4,20 +4,28 @@
       {{err}}
     </div>
   </div>
-  <div class="col-xs-12">
+  <div class="col-xs-12" ng-hide="timeTracked">
+    <h2>Select a .csv file</h2>
+    <p>This has to be generated with Caato Time Traker</p>
+    <input type="file" class="form-control" on-read-file="showContent($fileContent)" />
+  </div>
+  <div class="col-xs-12" ng-show="timeTracked">
     <div class="row">
       <div class="col-xs-12 text-center">
         <h3>Total Worked: <span class="label label-primary">{{grandTotal | number:2}} h</span></h3>
       </div>
     </div>
     <div class="row text-center" style="margin-bottom: 20px">
-      <div ng-repeat="(key, value) in total" class="label label-primary" style="margin-right: 10px">
+      <div ng-repeat="(key, value) in totalTask" class="label label-primary" style="margin-right: 10px">
         <b>{{key}}</b> {{value | number:2}} h
       </div>
     </div>
   </div>
   <div ng-show="timeTracked" class="col-xs-12">
-    <table class="table table-striped">
+    <a ng-click="details = !details" ng-init="details = false" class="btn btn-primary">
+      Toggle details
+    </a>
+    <table class="table table-striped" ng-show="details">
       <tr>
         <td>#</td>
         <td>Project</td>
