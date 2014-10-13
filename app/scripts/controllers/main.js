@@ -18,30 +18,44 @@ angular.module('timeAnalyzerApp')
     };
 
     var getTaskTotal = function(formattedRes){
-    	var groupedTask = _.groupBy(formattedRes, 'TASK');
 
-    	//calculate the total splitted by task
-    	var totalTask = {};
+        var grandTotal = 0;
 
-    	_.forEach(groupedTask, function(taskGroup){
-    		var label = taskGroup[0].TASK;
-    		var totalTaskTime = 0;
-    		_.forEach(taskGroup, function(task){
-    			if(task.HOURS){
-    				totalTaskTime += parseFloat(task.HOURS.replace(',','.'), 10);
-    			}
-    		});
-    		totalTask[label] = totalTaskTime;
-    	});
+        $scope.totalProject = {};
 
-    	$scope.totalTask = totalTask;
+        var groupedProject = _.groupBy(formattedRes, 'PROJECT');
 
-    	//calculate the total hours tracked
-    	var grandTotal = 0
-    	_.forEach($scope.totalTask, function(groupTotal){
-    		grandTotal += groupTotal;
-    	});
+        _.forEach(groupedProject, function(project){
 
+            var projectLabel = project[0].PROJECT;
+            var projectTotalTime = 0;
+            var groupedTask = _.groupBy(project, 'TASK');
+
+            //calculate the total splitted by task
+            var totalTask = {};
+            var totalTaskTime;
+            _.forEach(groupedTask, function(taskGroup){
+                var label = taskGroup[0].TASK;
+                totalTaskTime = 0;
+                _.forEach(taskGroup, function(task){
+                    if(task.HOURS){
+                        totalTaskTime += parseFloat(task.HOURS.replace(',','.'), 10);
+                    }
+                });
+                totalTask[label] = totalTaskTime;
+            });
+
+            $scope.totalProject[projectLabel] = totalTask;
+            projectTotalTime += totalTaskTime; 
+            $scope.totalProject[projectLabel].total = projectTotalTime;
+
+            //calculate the total hours tracked
+            _.forEach($scope.totalTask, function(groupTotal){
+                grandTotal += groupTotal;
+            });
+        });
+
+        console.log($scope.totalProject);
     	$scope.grandTotal = grandTotal;
     };
 
