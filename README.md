@@ -9,7 +9,7 @@ The application is generated and developed with GruntJs so:
 - install grunt packages with `npm install`
 - install js dependencies with `bower install`
 
-## Getting Started (v1.0.0)
+## Getting Started (v1.0.1)
 
 You can run the app via `grunt serve` or (probabily but not tested) build the application with `grunt build`. This will output the code in the `dist` folder.
 
