@@ -63,16 +63,21 @@ angular.module('timeAnalyzerApp')
                 });
                 //assign the total time worked on a task to that task
                 totalTask[label] = totalTaskTime;
-                console.log(totalTask);
+                
+                //incremente the project total
+                projectTotalTime += totalTaskTime;
+
                 //incremente the total worked
                 grandTotal += totalTaskTime;
             });
 
             //assign to task group object to the project object
             $scope.totalProject[projectLabel] = totalTask;
+
+            //assign the total time workend on a project to that project object
+            $scope.totalProject[projectLabel].total = projectTotalTime;
         });
 
-        console.log($scope.totalProject);
     	$scope.grandTotal = grandTotal;
     };
 
