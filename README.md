@@ -15,8 +15,9 @@ You can run the app via `grunt serve` or (probabily but not tested) build the ap
 
 ## TODO
 
-- Document the `main.js` controller
 - Install `grunt-docco` to generate the documentation
+- Document the `main.js` controller
+- Calculate the time worked per day and display it
 - Improve the Layout
 - Print some Charts
 
