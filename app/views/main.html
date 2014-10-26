@@ -24,6 +24,20 @@
       </div>
     </div>
   </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="row" ng-repeat="(key, value) in dailyResume | orderBy: key" ng-if="key && key != 'undefined'">
+        <div class="col-xs-8">
+          {{key}}
+        </div>
+        <div class="col-xs-4">
+          <div class="label label-primary">
+            {{value | date:2}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <div ng-show="timeTracked" class="col-xs-12">
     <a ng-click="details = !details" ng-init="details = false" class="btn btn-primary">
       Toggle details
