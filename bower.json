@@ -13,7 +13,7 @@
     "angular-touch": "~1.2.0",
     "angular-route": "~1.2.0",
     "lodash": "~2.4.1",
-    "intToHours": "teone/intToHours"
+    "angular-int-to-hours": "*"
   },
   "devDependencies": {
     "angular-mocks": "~1.2.0",
