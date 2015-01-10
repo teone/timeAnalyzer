@@ -17,7 +17,8 @@ angular
     'ngSanitize',
     'ngTouch',
     'intToHours',
-    'firebase'
+    'firebase',
+    'toaster'
   ])
   .config(function ($routeProvider) {
     $routeProvider

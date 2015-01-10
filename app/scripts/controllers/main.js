@@ -8,7 +8,7 @@
  * Controller of the timeAnalyzerApp
  */
 angular.module('timeAnalyzerApp')
-  .controller('MainCtrl', function ($scope, $firebase, csvToJson, taskTotal, dayTotal, _) {
+  .controller('MainCtrl', function ($scope, $firebase, toaster, csvToJson, taskTotal, dayTotal, _) {
 
     //Connect to Firebase
     // connect to firebase 
@@ -59,6 +59,13 @@ angular.module('timeAnalyzerApp')
         }
     }
 
+    $scope.deleteMonth = function(month){
+        var item = month.name;
+        $scope.history.$remove(month).then(function(res){
+            toaster.pop('error', item + " deleted!", "This month has been successfully deleted");
+        })
+    }
+
     $scope.toggleProject = function(pkey){
         if($scope.selectedProject === pkey){
             $scope.selectedProject = null;
@@ -66,5 +73,12 @@ angular.module('timeAnalyzerApp')
         else{
             $scope.selectedProject = pkey;
         }
+    }
+
+    $scope.reset = function(){
+        $scope.totalProject = null;
+        $scope.grandTotal = null;
+        $scope.dailyResume = null;
+        $scope.timeTracked = null;
     }
   });

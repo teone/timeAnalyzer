@@ -1,27 +1,35 @@
-<div class="row">
+<div class="row" ng-hide="timeTracked">
   <div ng-show="err" class="col-xs-12">
     <div class="alert alert-danger">
       {{err}}
     </div>
   </div>
-    <div class="col-xs-6" ng-hide="timeTracked">
+    <div class="col-xs-6">
     <h2>Insert the month name</h2>
     <p>This field is mandatory</p>
     <input type="text" class="form-control" ng-model="monthName">
   </div>
-  <div class="col-xs-6" ng-hide="timeTracked">
+  <div class="col-xs-6">
     <h2>Select a .csv file</h2>
     <p>This has to be generated with Caato Time Traker</p>
     <input type="file" class="form-control" on-read-file="showContent($fileContent)" />
   </div>
 </div>
+<div class="row" ng-show="timeTracked">
+  <div class="col-xs-12">
+    <a ng-click="reset()" class="btn btn-primary">Add More</a>
+  </div>
+</div>
+<!-- ============================================================ Repeating History ============================================================ -->
 <div class="row">
   <div class="col-xs-12">
-  <!-- Repeating History -->
     <div class="well" ng-repeat="month in history">
       <div class="row" ng-click="toggleMonth(month.name)">
         <div class="col-xs-6">{{month.name}}</div>
-        <div class="col-xs-6">{{month.timeWorked | intToHours}}</div>
+        <div class="col-xs-4">{{month.timeWorked | intToHours}}</div>
+        <div class="col-xs-2">
+          <a ng-click="deleteMonth(month)" class="btn btn-danger">Delete</a>
+        </div>
       </div>
       <div class="row">
         <div class="col-xs-12">
@@ -36,11 +44,11 @@
         </div>
       </div>
     </div>
-  <!-- Repeating History -->
   </div>
 </div>
-<div class="row">
-  <div class="col-xs-12" ng-show="timeTracked">
+<!-- ============================================================ Repeating History ============================================================ -->
+<div class="row" ng-show="timeTracked">
+  <div class="col-xs-12">
     <div class="row">
       <div class="col-xs-12 text-center">
         <h3>Total Worked: <span class="label label-primary">{{grandTotal | intToHours}} h</span></h3>
