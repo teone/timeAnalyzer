@@ -50,12 +50,14 @@ angular.module('timeAnalyzerApp')
         });
     };
 
-    $scope.toggleMonth = function(monthName){
-        if($scope.selectedMonth === monthName){
+    $scope.toggleMonth = function(monthName, kind){
+        if($scope.selectedMonth === monthName && $scope.kind === kind){
             $scope.selectedMonth = null;
+            $scope.kind = null;
         }
         else{
             $scope.selectedMonth = monthName;
+            $scope.kind = kind;
         }
     }
 
