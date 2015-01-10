@@ -4,7 +4,12 @@
       {{err}}
     </div>
   </div>
-  <div class="col-xs-12" ng-hide="timeTracked">
+    <div class="col-xs-6" ng-hide="timeTracked">
+    <h2>Insert the month name</h2>
+    <p>This field is mandatory</p>
+    <input type="text" class="form-control" ng-model="monthName">
+  </div>
+  <div class="col-xs-6" ng-hide="timeTracked">
     <h2>Select a .csv file</h2>
     <p>This has to be generated with Caato Time Traker</p>
     <input type="file" class="form-control" on-read-file="showContent($fileContent)" />

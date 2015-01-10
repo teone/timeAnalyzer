@@ -8,9 +8,21 @@
  * Controller of the timeAnalyzerApp
  */
 angular.module('timeAnalyzerApp')
-  .controller('MainCtrl', function ($scope, csvToJson, taskTotal, dayTotal, _) {
+  .controller('MainCtrl', function ($scope, $firebase, csvToJson, taskTotal, dayTotal, _) {
+
+    //Connect to Firebase
+    // connect to firebase 
+    var ref = new Firebase("https://time-analyzer.firebaseio.com/month");  
+    var fb = $firebase(ref);
 
     $scope.showContent = function($fileContent){
+
+        //checking month name
+        if(!$scope.monthName){
+            $scope.err = "Month Name is Mandatory";
+            return;
+        }
+
         var formattedRes = csvToJson.toJson($fileContent);
         $scope.timeTracked = formattedRes;
 
@@ -23,5 +35,13 @@ angular.module('timeAnalyzerApp')
 
         //get data on Daily Basis
         $scope.dailyResume = dayTotal.getHoursPerDay(formattedRes);
+
+        console.log($scope.totalProject);
+
+        fb.$push({
+            month: $scope.monthName,
+            totalProject: $scope.totalProject,
+            grandTotal: $scope.grandTotal
+        });
     };
   });

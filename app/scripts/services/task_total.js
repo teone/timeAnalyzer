@@ -37,38 +37,44 @@ angular.module('timeAnalyzerApp')
             //define an empty var for the counter of task total time
             var totalTaskTime;
 
-            //cicle the Project's group of tasks
-            _.forEach(groupedTask, function(taskGroup){
+            //checking that project label is not empty
+            if(projectLabel && projectLabel !== ''){
 
-                //assign a label to the task
-                var label = taskGroup[0].TASK;
+                console.log(projectLabel);
 
-                //resetting the calculated time for this task
-                totalTaskTime = 0;
+                //cicle the Project's group of tasks
+                _.forEach(groupedTask, function(taskGroup){
 
-                //cicle each entry of a task group
-                _.forEach(taskGroup, function(task){
+                    //assign a label to the task
+                    var label = taskGroup[0].TASK;
 
-                    if(task.HOURS){
-                        //update the task total
-                        totalTaskTime += parseFloat(task.HOURS.replace(',','.'), 10);
-                    }
+                    //resetting the calculated time for this task
+                    totalTaskTime = 0;
+
+                    //cicle each entry of a task group
+                    _.forEach(taskGroup, function(task){
+
+                        if(task.HOURS){
+                            //update the task total
+                            totalTaskTime += parseFloat(task.HOURS.replace(',','.'), 10);
+                        }
+                    });
+                    //assign the total time worked on a task to that task
+                    totalTask[label] = totalTaskTime;
+                    
+                    //incremente the project total
+                    projectTotalTime += totalTaskTime;
+
+                    //incremente the total worked
+                    grandTotal += totalTaskTime;
                 });
-                //assign the total time worked on a task to that task
-                totalTask[label] = totalTaskTime;
-                
-                //incremente the project total
-                projectTotalTime += totalTaskTime;
 
-                //incremente the total worked
-                grandTotal += totalTaskTime;
-            });
+                //assign to task group object to the project object
+                totalProject[projectLabel] = totalTask;
 
-            //assign to task group object to the project object
-            totalProject[projectLabel] = totalTask;
-
-            //assign the total time workend on a project to that project object
-            totalProject[projectLabel].total = projectTotalTime;
+                //assign the total time workend on a project to that project object
+                totalProject[projectLabel].total = projectTotalTime;
+            }
         });
 
         return {projects: totalProject, total: grandTotal};
