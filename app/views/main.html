@@ -57,13 +57,13 @@
   </div>
   <div class="row">
     <div class="col-xs-12">
-      <div class="row" ng-repeat="(key, value) in dailyResume | orderBy: key" ng-if="key && key != 'undefined'">
+      <div class="row" ng-repeat="item in dailyResume | orderBy: item.date">
         <div class="col-xs-8">
-          {{key}}
+          {{item.date}}
         </div>
         <div class="col-xs-4">
           <div class="label label-primary">
-            {{value | intToHours}}
+            {{item.total | intToHours}}
           </div>
         </div>
       </div>

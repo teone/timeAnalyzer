@@ -12,7 +12,7 @@ angular.module('timeAnalyzerApp')
     
     this.getHoursPerDay = function(data){
 
-        var result = {};
+        var result = [];
 
         //group the task by day
         var groupedData = _.groupBy(data, function(item){
@@ -32,7 +32,10 @@ angular.module('timeAnalyzerApp')
                     dailyTotal += parseFloat(task.HOURS.replace(',','.'), 10);
                 }
             });
-            result[key] = dailyTotal;
+            
+            if(key && dailyTotal){
+                result.push({date: key, total: dailyTotal});
+            }
         };
 
         return result;

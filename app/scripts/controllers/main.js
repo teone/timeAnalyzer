@@ -45,7 +45,8 @@ angular.module('timeAnalyzerApp')
         month.$push({
             name: $scope.monthName,
             timeWorked: $scope.grandTotal,
-            projectList: $scope.totalProject
+            projectList: $scope.totalProject,
+            dailyResume: $scope.dailyResume
         });
     };
 
