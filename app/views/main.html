@@ -30,12 +30,14 @@
             {{month.name}}
             <span class="label label-primary">{{month.timeWorked | intToHours}}</span>
           </h3>
+          <div>Day worked: {{getDays(month.dailyResume)}}</div>
+          <div>Average per day: {{getDayAverage(month.dailyResume, month.timeWorked) | intToHours}}</div>
         </div>
         <div class="col-xs-2">
-          <a ng-click="toggleMonth(month.name, 'prjs')" class="btn btn-default">Projects</a>
+          <a ng-click="toggleMonth(month.name, 'prjs')" class="btn btn-default" ng-class="{active: selectedMonth == month.name && kind == 'prjs'}">Projects</a>
         </div>
         <div class="col-xs-2">
-          <a ng-click="toggleMonth(month.name, 'days')" class="btn btn-default">Days</a>
+          <a ng-click="toggleMonth(month.name, 'days')" class="btn btn-default" ng-class="{active: selectedMonth == month.name && kind == 'days'}">Days</a>
         </div>
         <div class="col-xs-2 text-right">
           <a ng-click="deleteMonth(month)" class="btn btn-danger">Delete</a>
@@ -60,7 +62,7 @@
             <li class="list-group-item active">
               DaiLy Resume
             </li>
-            <li class="list-group-item" ng-repeat="day in month.dailyResume">
+            <li class="list-group-item" ng-repeat="day in month.dailyResume | orderBy:day.date">
               <span class="badge">{{ day.total | intToHours}}</span>
               {{day.date}}
             </li>

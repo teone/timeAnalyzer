@@ -83,4 +83,13 @@ angular.module('timeAnalyzerApp')
         $scope.dailyResume = null;
         $scope.timeTracked = null;
     }
+
+    $scope.getDays = function(dailyResume){
+        return dailyResume.length;
+    }
+
+    $scope.getDayAverage = function(dailyResume, total){
+        var workingDays = dailyResume.length;
+        return total/workingDays;
+    }
   });
