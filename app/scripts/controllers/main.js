@@ -13,7 +13,11 @@ angular.module('timeAnalyzerApp')
     //Connect to Firebase
     // connect to firebase 
     var ref = new Firebase("https://time-analyzer.firebaseio.com/month");  
-    var fb = $firebase(ref);
+    var month = $firebase(ref);
+
+    $scope.history = month.$asArray();
+
+    console.log($scope.history);
 
     $scope.showContent = function($fileContent){
 
@@ -38,10 +42,10 @@ angular.module('timeAnalyzerApp')
 
         console.log($scope.totalProject);
 
-        fb.$push({
-            month: $scope.monthName,
-            totalProject: $scope.totalProject,
-            grandTotal: $scope.grandTotal
+        month.$push({
+            name: $scope.monthName,
+            timeWorked: $scope.grandTotal,
+            projectList: $scope.totalProject
         });
     };
   });
