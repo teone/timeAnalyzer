@@ -14,20 +14,32 @@
     <p>This has to be generated with Caato Time Traker</p>
     <input type="file" class="form-control" on-read-file="showContent($fileContent)" />
   </div>
+</div>
+<div class="row">
   <div class="col-xs-12">
-    <div class="row" ng-repeat="month in history">
-      <div class="col-xs-6">{{month.name}}</div>
-      <div class="col-xs-6">{{month.timeWorked | intToHours}}</div>
-      <div class="col-xs-12">
-        <div class="row" ng-repeat="(pkey, pvalue) in month.projectList">
-          {{pkey}} {{pvalue.total | intToHours}}
-          <div class="col-xs-12" ng-repeat="(tkey, tvalue) in pvalue" ng-if="tkey != 'total'" >
-            <b>{{tkey}}</b> {{tvalue | intToHours}} h
+  <!-- Repeating History -->
+    <div class="well" ng-repeat="month in history">
+      <div class="row" ng-click="toggleMonth(month.name)">
+        <div class="col-xs-6">{{month.name}}</div>
+        <div class="col-xs-6">{{month.timeWorked | intToHours}}</div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="row" ng-repeat="(pkey, pvalue) in month.projectList" ng-show="selectedMonth == month.name">
+            <div class="col-xs-11 col-xs-offset-1" ng-click="toggleProject(pkey)">
+              {{pkey}} {{pvalue.total | intToHours}}
+            </div>
+            <div class="col-xs-10 col-xs-offset-2" ng-repeat="(tkey, tvalue) in pvalue" ng-if="tkey != 'total'" ng-show="selectedProject == pkey">
+              <b>{{tkey}}</b> {{tvalue | intToHours}} h
+            </div>
           </div>
         </div>
       </div>
     </div>
+  <!-- Repeating History -->
   </div>
+</div>
+<div class="row">
   <div class="col-xs-12" ng-show="timeTracked">
     <div class="row">
       <div class="col-xs-12 text-center">

@@ -2,6 +2,9 @@
 
 TimeAnalyzer is an AngularJs applicaztion to evaluate the time tracked with Caato TimeTracker
 
+**Note:**
+This application is in a _pre-alpha_ version. At the moment this is absolutely not usable.
+
 ## Installation
 
 The application is generated and developed with GruntJs so:
@@ -15,10 +18,13 @@ You can run the app via `grunt serve` or (probabily but not tested) build the ap
 
 ## TODO
 
+- Save to firebase the daily working time within a month
+- Added resource classification to track multiple people in a team
+
 - Install `grunt-docco` to generate the documentation
 - Document the `main.js` controller
-- Calculate the time worked per day and display it
 - Improve the Layout
+- Define Team Statistics
 - Print some Charts
 
 If you use this app, please quote me.

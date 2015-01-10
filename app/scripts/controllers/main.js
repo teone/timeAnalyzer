@@ -48,4 +48,22 @@ angular.module('timeAnalyzerApp')
             projectList: $scope.totalProject
         });
     };
+
+    $scope.toggleMonth = function(monthName){
+        if($scope.selectedMonth === monthName){
+            $scope.selectedMonth = null;
+        }
+        else{
+            $scope.selectedMonth = monthName;
+        }
+    }
+
+    $scope.toggleProject = function(pkey){
+        if($scope.selectedProject === pkey){
+            $scope.selectedProject = null;
+        }
+        else{
+            $scope.selectedProject = pkey;
+        }
+    }
   });
